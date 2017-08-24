@@ -11,15 +11,20 @@ class Index extends Base
 
         /**
          * @return \think\response\View
+         * @return bool
          * @author Frank
          */
         public function  setMail ($title = null, $content = null, $to = null){
 
+                $title = 'test';
+                $content = 'This is test email';
+                //$to = $_POST['Email3'];
+                $to = '2407181194@qq.com';
                 if($_POST){
 
                         Loader::import('PHPMailer\PHPMailer');
                         Loader::import('PHPMailer\SMTP');
-                        $mail = new \PHPMailer();
+                        $mail = new PHPMailer();
                         $mail->IsSMTP();
                         $mail->SMTPAuth = true;
                         $mail->Host = 'smtp.163.com';
