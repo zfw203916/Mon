@@ -16,15 +16,19 @@ class Index extends Base
         public function  setMail ($title = null, $content = null, $to = null){
 
                 if($_POST){
+
                         Loader::import('PHPMailer\PHPMailer');
+                        Loader::import('PHPMailer\SMTP');
                         $mail = new \PHPMailer();
                         $mail->IsSMTP();
                         $mail->SMTPAuth = true;
-                        $mail->Host = 'smtp.qq.com';
-                        $mail->From = '852451580@qq.com';   //发送者的邮件地址
-                        $mail->FromName = 'Email-test';           //发送邮件的用户昵称
-                        $mail->Username = '852451580';       //登录到邮箱的用户名
-                        $mail->Password = 'zypzfw1984';      //第三方登录的授权码，在邮箱里面设置
+                        $mail->Host = 'smtp.163.com';
+                        $mail->Port = 994;
+                        $mail->SMTPSecure = "ssl";
+                        $mail->From = 'zfw203916@163.com';   //发送者的邮件地址
+                        $mail->FromName = 'Frank';           //发送邮件的用户昵称
+                        $mail->Username = 'zfw203916';       //登录到邮箱的用户名
+                        $mail->Password = "fjwnphrlehwcbeae";      //第三方登录的授权码，在邮箱里面设置
                         //编辑发送的邮件内容
                         $mail->IsHTML(true);                   //发送的内容使用html编写
                         $mail->CharSet = 'utf-8';              //设置发送内容的编码
@@ -32,12 +36,12 @@ class Index extends Base
                         $mail->MsgHTML($content);              //发送的邮件内容主体
 
                         //告诉服务器接收人的邮件地址
-                        $to = $_POST['Email2'];
                         $mail->AddAddress($to);
 
                         //调用send方法，执行发送
                         $result = $mail->Send();
-                        var_dump($result);
+                        var_dump($result);die;
+                        //var_dump($mail);die;
                         if($result){
                                 return true;
                         }else{
